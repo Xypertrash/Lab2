@@ -2,9 +2,6 @@ package bsu.rfe.java.group6.lab2.yakusik.var12A;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
@@ -28,8 +24,8 @@ public class MainFrame  extends JFrame{
 	private JTextField textFieldX;
 	private JTextField textFieldY;
 	private JTextField textFieldZ;
-	
 	private JTextField textFieldResult;
+	private Double sum = 0.0;
 	
 	private ButtonGroup radioButtons = new ButtonGroup();
 	
@@ -47,9 +43,10 @@ public class MainFrame  extends JFrame{
 	private void addRadioButton(String buttonName, final int formulaId) {
 		JRadioButton button = new JRadioButton(buttonName);
 		button.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent ev) {
 				MainFrame.this.formulaId = formulaId;
-				imagePane.updateUI();
+				//imagePane.updateUI(); BUGGY
 			}
 		});
 		radioButtons.add(button); 
@@ -146,17 +143,49 @@ public class MainFrame  extends JFrame{
 		hboxButtons.add(Box.createHorizontalGlue());
 		hboxButtons.setBorder(
 				BorderFactory.createLineBorder(Color.GREEN));
+		JButton buttonMPlus = new JButton("M+");
+		buttonMPlus.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ev) {
+				try {
+					double x = Double.parseDouble(textFieldX.getText());
+					double y = Double.parseDouble(textFieldY.getText());
+					double z = Double.parseDouble(textFieldZ.getText());
+					if (formulaId == 1) 
+						sum += calculate1(x,y,z);
+					else 
+						sum += calculate2(x,y,z);
+					textFieldResult.setText(sum.toString());
+				}
+				catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(MainFrame.this, "Ошибка в формате числа с плавающей точкой", "Ошибочный формат числа", JOptionPane.WARNING_MESSAGE);
+				}
+			}
+		});
+		
+		JButton buttonMC = new JButton("MC");
+		buttonMC.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent ev) {
+				sum = 0.0;
+				textFieldResult.setText(sum.toString());
+			}
+		});
+		
+		Box hboxButtons2 = Box.createHorizontalBox();
+		hboxButtons2.add(buttonMC);
+		hboxButtons2.add(Box.createHorizontalGlue());
+		hboxButtons2.add(buttonMPlus);
+		
+		hboxButtons2.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		
 		Box contentBox = Box.createVerticalBox();
 		contentBox.add(hboxFormulaType);
 		contentBox.add(hboxVariables);
 		contentBox.add(hboxResult);
+		contentBox.add(hboxButtons2);
 		contentBox.add(hboxButtons);
 		contentBox.add(Box.createVerticalGlue());
 		getContentPane().add(contentBox, BorderLayout.CENTER);		
-	}
-	public static void main(String[] args) {
-		MainFrame frame = new MainFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
 	}
 }
