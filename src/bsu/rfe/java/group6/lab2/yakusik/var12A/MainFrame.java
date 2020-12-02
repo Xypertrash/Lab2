@@ -66,38 +66,35 @@ public class MainFrame  extends JFrame{
 		hboxFormulaType.add(Box.createHorizontalGlue());
 		hboxFormulaType.setBorder(
 				BorderFactory.createLineBorder(Color.YELLOW));
-		JLabel labelForX = new JLabel("X: ");
+		JLabel labelForX = new JLabel("X: ", JLabel.CENTER);
 		textFieldX = new JTextField("0", 10);
 		textFieldX.setMaximumSize(textFieldX.getPreferredSize());
-		JLabel labelForY = new JLabel("Y: ");
+		JLabel labelForY = new JLabel("Y: ", JLabel.CENTER);
 		textFieldY = new JTextField("0", 10);
 		textFieldY.setMaximumSize(textFieldY.getPreferredSize());
-		JLabel labelForZ = new JLabel("Z: ");
+		JLabel labelForZ = new JLabel("Z: ", JLabel.CENTER);
 		textFieldZ  = new JTextField("0", 10);
 		textFieldZ.setMaximumSize(textFieldZ.getPreferredSize());
-		Box hboxVariables = Box.createHorizontalBox();
-		hboxVariables.setBorder(
-				BorderFactory.createLineBorder(Color.RED));
-		//Creating fields for X
-		hboxVariables.add(Box.createHorizontalGlue());
-		hboxVariables.add(labelForX);
-		hboxVariables.add(Box.createHorizontalStrut(10));
-		hboxVariables.add(textFieldX);
-		//Creating fields for Y
-		hboxVariables.add(Box.createHorizontalStrut(100));
-		hboxVariables.add(labelForY);
-		hboxVariables.add(Box.createHorizontalStrut(10));
-		hboxVariables.add(textFieldY);
-		hboxVariables.add(Box.createHorizontalGlue());
-		//Creating fields for Z
-		hboxVariables.add(Box.createHorizontalStrut(100));
-		hboxVariables.add(Box.createHorizontalGlue());
-		hboxVariables.add(labelForZ);
-		hboxVariables.add(Box.createHorizontalStrut(10));
-		hboxVariables.add(textFieldZ);
+        Box hboxVariables = Box.createHorizontalBox();
+        hboxVariables.setBorder(BorderFactory.createLineBorder(Color.RED));
+        hboxVariables.add(Box.createHorizontalGlue());
+        hboxVariables.add(labelForX);
+        hboxVariables.add(Box.createHorizontalStrut(10));
+        hboxVariables.add(textFieldX);
+        hboxVariables.add(Box.createHorizontalStrut(30));
+        hboxVariables.add(Box.createHorizontalGlue());
+        hboxVariables.add(labelForY);
+        hboxVariables.add(Box.createHorizontalStrut(10));
+        hboxVariables.add(textFieldY);
+        hboxVariables.add(Box.createHorizontalStrut(30));
+        hboxVariables.add(Box.createHorizontalGlue());
+        hboxVariables.add(labelForZ);
+        hboxVariables.add(Box.createHorizontalStrut(10));
+        hboxVariables.add(textFieldZ);
+        hboxVariables.add(Box.createHorizontalGlue());
 		
 		JLabel labelForResult = new JLabel("Результат: ");
-		textFieldResult = new JTextField("0", 10);
+		textFieldResult = new JTextField("0", 25);
 		textFieldResult.setMaximumSize(
 				textFieldResult.getPreferredSize());
 		Box hboxResult = Box.createHorizontalBox();
@@ -183,8 +180,8 @@ public class MainFrame  extends JFrame{
 		contentBox.add(hboxFormulaType);
 		contentBox.add(hboxVariables);
 		contentBox.add(hboxResult);
-		contentBox.add(hboxButtons2);
 		contentBox.add(hboxButtons);
+		contentBox.add(hboxButtons2);
 		contentBox.add(Box.createVerticalGlue());
 		getContentPane().add(contentBox, BorderLayout.CENTER);		
 	}
